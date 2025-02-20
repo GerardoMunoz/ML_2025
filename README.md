@@ -23,7 +23,7 @@
   - **SOM**
 
 ## 5. Supervised Learning
-- Need to predict one of the columns
+- Prediction of one of the variables
 - Data balance
 - Overfitting
 - Training, testing, and validation data
@@ -36,7 +36,10 @@
 | Confusion Matrix | Error and Accuracy |
 
 
-### Nearest Neighbors (Finding the Optimal Number of Neighbors)
+### Nearest Neighbors 
+- Finding the Optimal Number of Neighbors
+- Computational cost
+- Good and bad data for this technique
 
 ### Statistical and Probabilistic Algorithms
 - Most probable value
@@ -48,8 +51,10 @@
 - Decision Tree
 - Random Forest
 
-### Algorithms Using Gradient Descent
+### Gradient Descent
 - **Linear and Logistic Regression**
+  - **Ridge**
+  - **Lasso**
 - **Perceptron**
   - **Linear Perceptron**
   - **Error and Softmax**
