@@ -8,7 +8,7 @@
 - **Numeric**
 - **Structured:** Vector, Image, Audio, Text, …
 
-## 3. Pandas and hvPlot
+## 3. Polars and hvPlot
 
 ## 4. Unsupervised Learning
 ### Categorical Data
