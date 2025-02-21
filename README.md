@@ -9,6 +9,8 @@
 - **Structured:** Vector, Image, Audio, Text, …
 
 ## 3. Polars and hvPlot
+* https://github.com/GerardoMunoz/ML_2025/blob/main/ML_010_data_types_polars.ipynb
+* https://www.kaggle.com/code/gerardomunoz/imdb-polars
 
 ## 4. Unsupervised Learning
 ### Categorical Data
