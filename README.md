@@ -64,6 +64,8 @@
   - **Multilayer and Backpropagation**
 
 ### Support Vector Machines (SVM)
+- Optimization in SVM
+- Kernel for nonlinear classification
 
 ## 6. Reinforcement Learning
 
