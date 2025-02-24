@@ -63,6 +63,8 @@
   - **RELU and Interpretation as a Tree**
   - **Multilayer and Backpropagation**
 
+### Support Vector Machines (SVM)
+
 ## 6. Reinforcement Learning
 
 ## 7. Project
