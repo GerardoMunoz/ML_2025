@@ -54,6 +54,7 @@
 - Random Forest
 
 ### Gradient Descent
+https://gerardomunoz.github.io/ML_2025/ViewGradienDescent.html
 - **Linear and Logistic Regression**
   - **Ridge**
   - **Lasso**
