@@ -21,17 +21,21 @@ https://github.com/GerardoMunoz/ML_2025/blob/main/FCA_and_Association_Rules.ipyn
 - **Dimensionality Reduction**
   - **PCA**
   - **Autoencoders**
+  - **Anomaly detection**
 - **Clustering**
   - **k-means**
   - **SOM**
 
 ## 5. Supervised Learning
 - Prediction of one of the variables
+- Normalization, Standardization
 - Data balance
 - Overfitting
 - Training, testing, and validation data
 - Cross-validation (seed, repeatability)
+- Feature transformation
 - Type of column
+- Auto ML
 
 | **Categorical** | **Numerical** |
 |---------------|-------------|
@@ -59,6 +63,7 @@ https://gerardomunoz.github.io/ML_2025/ViewGradienDescent.html
 - **Linear and Logistic Regression**
   - **Ridge**
   - **Lasso**
+  - **Polynomial Regression**
 - **Perceptron**
   - **Linear Perceptron**
   - **Error and Softmax**
