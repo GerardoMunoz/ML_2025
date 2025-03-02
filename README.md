@@ -14,6 +14,7 @@
 
 ## 4. Unsupervised Learning
 ### Categorical Data
+https://github.com/GerardoMunoz/ML_2025/blob/main/FCA_and_Association_Rules.ipynb
 - **FCA**
 - **Association Rule**
 ### Numerical Data
