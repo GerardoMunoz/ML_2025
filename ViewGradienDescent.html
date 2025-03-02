@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Descent Game</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <label for="xSlider">X Position:</label>
+    <input type="range" id="xSlider" min="-5" max="5" step="0.1" value="0">
+    
+    <label for="zSlider">Z Position:</label>
+    <input type="range" id="zSlider" min="-5" max="5" step="0.1" value="0">
+    
+    <label for="learningRate">Learning Rate:</label>
+    <input type="number" id="learningRate" step="0.01" value="0.1">
+    
+    <label for="stepDelay">Step Delay (ms):</label>
+    <input type="number" id="stepDelay" step="10" value="100">
+    
+    <label for="amplitude">Amplitude:</label>
+    <input type="range" id="amplitude" min="0.1" max="2" step="0.1" value="1">
+    
+    <label for="frequency">Frequency:</label>
+    <input type="range" id="frequency" min="0.5" max="3" step="0.1" value="1">
+    
+    <button onclick="startDescent()">Start</button>
+    <div id="game"></div>
+    
+    <script>
+        let scene, camera, renderer, surface, point;
+        let learningRate = 0.1;
+        let stepDelay = 100;
+        let amplitude = 1;
+        let frequency = 1;
+        let pointPos = { x: 0, z: 0, y: 0 };
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('game').appendChild(renderer.domElement);
+
+            const geometry = new THREE.PlaneGeometry(10, 10, 50, 50);
+            geometry.rotateX(-Math.PI / 2);
+            const positions = geometry.attributes.position;
+            for (let i = 0; i < positions.count; i++) {
+                let x = positions.getX(i);
+                let z = positions.getZ(i);
+                let y = heightFunction(x, z);
+                positions.setY(i, y);
+            }
+            positions.needsUpdate = true;
+            geometry.computeVertexNormals();
+
+            const material = new THREE.MeshStandardMaterial({ color: 0x88ccff, wireframe: false, side: THREE.DoubleSide });
+            surface = new THREE.Mesh(geometry, material);
+            scene.add(surface);
+
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(5, 5, 5).normalize();
+            scene.add(light);
+
+            const pointGeometry = new THREE.SphereGeometry(0.1, 16, 16);
+            const pointMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+            point = new THREE.Mesh(pointGeometry, pointMaterial);
+            scene.add(point);
+
+            updatePointPosition();
+
+            document.getElementById("xSlider").addEventListener("input", updatePointPosition);
+            document.getElementById("zSlider").addEventListener("input", updatePointPosition);
+            document.getElementById("amplitude").addEventListener("input", updateSurface);
+            document.getElementById("frequency").addEventListener("input", updateSurface);
+
+            camera.position.set(0, 5, 5);
+            camera.lookAt(0, 0, 0);
+            animate();
+        }
+
+        function heightFunction(x, z) {
+            return amplitude * Math.sin(frequency * x) * Math.cos(frequency * z);
+        }
+
+        function updatePointPosition() {
+            pointPos.x = parseFloat(document.getElementById("xSlider").value);
+            pointPos.z = parseFloat(document.getElementById("zSlider").value);
+            pointPos.y = heightFunction(pointPos.x, pointPos.z);
+            point.position.set(pointPos.x, pointPos.y, pointPos.z);
+        }
+
+        function updateSurface() {
+            amplitude = parseFloat(document.getElementById("amplitude").value);
+            frequency = parseFloat(document.getElementById("frequency").value);
+            const positions = surface.geometry.attributes.position;
+            for (let i = 0; i < positions.count; i++) {
+                let x = positions.getX(i);
+                let z = positions.getZ(i);
+                let y = heightFunction(x, z);
+                positions.setY(i, y);
+            }
+            positions.needsUpdate = true;
+            surface.geometry.computeVertexNormals();
+            updatePointPosition();
+        }
+
+        function gradient(x, z) {
+            let dx = amplitude * frequency * Math.cos(frequency * x) * Math.cos(frequency * z);
+            let dz = -amplitude * frequency * Math.sin(frequency * x) * Math.sin(frequency * z);
+            return { dx, dz };
+        }
+
+        function startDescent() {
+            learningRate = parseFloat(document.getElementById('learningRate').value) || 0.1;
+            stepDelay = parseInt(document.getElementById('stepDelay').value) || 100;
+            movePoint();
+        }
+
+        function movePoint() {
+            let grad = gradient(pointPos.x, pointPos.z);
+            pointPos.x -= learningRate * grad.dx;
+            pointPos.z -= learningRate * grad.dz;
+            pointPos.y = heightFunction(pointPos.x, pointPos.z);
+            point.position.set(pointPos.x, pointPos.y, pointPos.z);
+            if (Math.abs(grad.dx) > 0.01 || Math.abs(grad.dz) > 0.01) {
+                setTimeout(movePoint, stepDelay);
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+
+        init();
+    </script>
+</body>
+</html>
