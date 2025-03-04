@@ -13,18 +13,19 @@
 * https://www.kaggle.com/code/gerardomunoz/imdb-polars
 
 ## 4. Unsupervised Learning
-### Categorical Data
+### Boolean Data
 https://github.com/GerardoMunoz/ML_2025/blob/main/FCA_and_Association_Rules.ipynb
 - **FCA**
 - **Association Rule**
 ### Numerical Data
-- **Dimensionality Reduction**
+- Applications
+  - **Clustering**
+  - **Dimensionality Reduction**
+- Algorithms
   - **PCA**
-  - **UMAP**
+  - **SOM** and **UMAP**
   - **Autoencoders** (Anomaly detection)
-- **Clustering**
   - **k-means**
-  - **SOM**
 
 ## 5. Supervised Learning
 - Prediction of one of the variables
