@@ -20,8 +20,8 @@ https://github.com/GerardoMunoz/ML_2025/blob/main/FCA_and_Association_Rules.ipyn
 ### Numerical Data
 - **Dimensionality Reduction**
   - **PCA**
-  - **Autoencoders**
-  - **Anomaly detection**
+  - **UMAP**
+  - **Autoencoders** (Anomaly detection)
 - **Clustering**
   - **k-means**
   - **SOM**
