@@ -21,12 +21,14 @@ https://github.com/GerardoMunoz/ML_2025/blob/main/FCA_and_Association_Rules.ipyn
 - Applications
   - **Clustering**
   - **Dimensionality Reduction**
+  - **Anomaly detection**
+  - **Content-Addressable Memory**
 - Algorithms
   - **PCA**
   - **Hopfield Network**
   - **Boltzmann Machine**
   - **SOM** and **UMAP**
-  - **Autoencoders** (Anomaly detection)
+  - **Autoencoders**
   - **k-means**
 
 ## 5. Supervised Learning
