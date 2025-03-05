@@ -21,7 +21,7 @@ https://github.com/GerardoMunoz/ML_2025/blob/main/FCA_and_Association_Rules.ipyn
 - Applications
   - **Clustering**
   - **Dimensionality Reduction**
-  - **Anomaly detection**
+  - **Anomaly Detection**
   - **Content-Addressable Memory**
 - Algorithms
   - **PCA**
