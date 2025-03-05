@@ -23,6 +23,8 @@ https://github.com/GerardoMunoz/ML_2025/blob/main/FCA_and_Association_Rules.ipyn
   - **Dimensionality Reduction**
 - Algorithms
   - **PCA**
+  - **Hopfield Network**
+  - **Boltzmann Machine**
   - **SOM** and **UMAP**
   - **Autoencoders** (Anomaly detection)
   - **k-means**
