@@ -24,6 +24,7 @@ https://github.com/GerardoMunoz/ML_2025/blob/main/FCA_and_Association_Rules.ipyn
   - **Anomaly Detection**
   - **Content-Addressable Memory**
 - Algorithms
+https://github.com/GerardoMunoz/ML_2025/blob/main/Hopfield_Covariance.ipynb
   - **PCA**
   - **Hopfield Network**
   - **Boltzmann Machine**
