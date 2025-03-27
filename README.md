@@ -46,8 +46,8 @@ https://github.com/GerardoMunoz/ML_2025/blob/main/Hopfield_Covariance.ipynb
 | **Categorical** | **Numerical** |
 |---------------|-------------|
 | Classification | Regression |
-| Confusion Matrix | Error |
-| Accuracy |  |
+| Confusion Matrix | ROC Curve |
+| Accuracy | Error |
 
 
 ### Nearest Neighbors 
