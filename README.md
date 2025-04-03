@@ -68,6 +68,7 @@ https://github.com/GerardoMunoz/ML_2025/blob/main/Hopfield_Covariance.ipynb
 ### Gradient Descent
 https://gerardomunoz.github.io/ML_2025/ViewGradienDescent.html
 - **Linear and Logistic Regression**
+  https://colab.research.google.com/github/GerardoMunoz/ML_2025/blob/main/Regression_Kernels.ipynb
   - **Ridge**
   - **Lasso**
   - **Polynomial Regression**
