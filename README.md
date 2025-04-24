@@ -86,6 +86,7 @@ https://gerardomunoz.github.io/ML_2025/ViewGradienDescent.html
 
 ## 7. Convolutional Network 
 * https://github.com/GerardoMunoz/Vision
+* https://gerardomunoz.github.io/ML_2025/Conv2D.html
 * https://gerardomunoz.github.io/ML_2025/Conv2DTranspose.html
 
 ## 7. Project
