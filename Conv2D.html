@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conv2D Animation</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input { width: 50px; margin: 5px; }
+    table { border-collapse: collapse; margin: 10px 0; }
+    td { border: 1px solid #aaa; width: 30px; height: 30px; text-align: center; position: relative; }
+    .controls { margin-bottom: 20px; }
+    .highlight { background-color: rgba(0, 255, 0, 0.3); }
+    .output-cell { background-color: rgba(0, 0, 255, 0.1); }
+    .filter-grid input { background-color: rgba(255, 255, 0, 0.2); }
+  </style>
+</head>
+<body>
+  <h2>Convolution (Conv2D) Animator</h2>
+  <div class="controls">
+    Input Size (n): <input id="inputSize" type="number" value="5" min="1" />
+    Filter Size (f): <input id="filterSize" type="number" value="3" min="1" />
+    Stride (s): <input id="stride" type="number" value="1" min="1" />
+    <button onclick="generateGrids()">Generate</button>
+    <button onclick="nextStep()">Next Step</button>
+  </div>
+
+  <h3>Input nxn</h3>
+  <div id="inputGrid"></div>
+  <h3>Filter fxf</h3>
+  <div id="filterGrid"></div>
+  <h3>Output (floor((n-f)/s)+1)x(floor((n-f)/s)+1) </h3>
+  <div id="outputGrid"></div>
+
+  <script>
+    let inputData = [];
+    let filterData = [];
+    let outputData = [];
+    let f = 3, s = 1;
+    let step = 0, outRows, outCols;
+
+    function createTable(rows, cols, data, editable = false, isFilter = false) {
+      const table = document.createElement('table');
+      if (isFilter) table.className = 'filter-grid';
+      for (let i = 0; i < rows; i++) {
+        const tr = document.createElement('tr');
+        for (let j = 0; j < cols; j++) {
+          const td = document.createElement('td');
+          if (editable) {
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.value = data[i][j];
+            input.style.width = '30px';
+            input.onchange = () => data[i][j] = parseInt(input.value);
+            td.appendChild(input);
+          } else {
+            td.textContent = data[i][j];
+            td.className = 'output-cell';
+          }
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+      }
+      return table;
+    }
+
+    function generateGrids() {
+      const n = parseInt(document.getElementById('inputSize').value);
+      f = parseInt(document.getElementById('filterSize').value);
+      s = parseInt(document.getElementById('stride').value);
+
+      inputData = Array.from({ length: n }, () => Array.from({ length: n }, () => Math.floor(Math.random() * 10)));
+      filterData = Array.from({ length: f }, () => Array.from({ length: f }, () => 1));
+
+      outRows = Math.floor((n - f) / s) + 1;
+      outCols = Math.floor((n - f) / s) + 1;
+      outputData = Array.from({ length: outRows }, () => Array.from({ length: outCols }, () => 0));
+      step = 0;
+
+      document.getElementById('inputGrid').innerHTML = '';
+      document.getElementById('filterGrid').innerHTML = '';
+      document.getElementById('outputGrid').innerHTML = '';
+
+      document.getElementById('inputGrid').appendChild(createTable(n, n, inputData, true));
+      document.getElementById('filterGrid').appendChild(createTable(f, f, filterData, true, true));
+      document.getElementById('outputGrid').appendChild(createTable(outRows, outCols, outputData));
+    }
+
+    function nextStep() {
+      const n = inputData.length;
+      if (step >= outRows * outCols) return;
+
+      const oi = Math.floor(step / outCols);
+      const oj = step % outCols;
+      let sum = 0;
+
+      for (let fi = 0; fi < f; fi++) {
+        for (let fj = 0; fj < f; fj++) {
+          const ii = oi * s + fi;
+          const jj = oj * s + fj;
+          sum += inputData[ii][jj] * filterData[fi][fj];
+        }
+      }
+      outputData[oi][oj] = sum;
+      document.getElementById('outputGrid').innerHTML = '';
+      document.getElementById('outputGrid').appendChild(createTable(outRows, outCols, outputData));
+      step++;
+    }
+
+    generateGrids();
+  </script>
+</body>
+</html>
