@@ -85,7 +85,7 @@ https://gerardomunoz.github.io/ML_2025/ViewGradienDescent.html
 ## 6. Reinforcement Learning
 
 ## 7. Convolutional Network 
-https://github.com/GerardoMunoz/Vision
-https://gerardomunoz.github.io/ML_2025/Conv2DTranspose.html
+* https://github.com/GerardoMunoz/Vision
+* https://gerardomunoz.github.io/ML_2025/Conv2DTranspose.html
 
 ## 7. Project
