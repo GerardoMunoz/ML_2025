@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conv2DTranspose Animation</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input { width: 50px; margin: 5px; }
+    table { border-collapse: collapse; margin: 10px 0; }
+    td { border: 1px solid #aaa; width: 30px; height: 30px; text-align: center; }
+    .controls { margin-bottom: 20px; }
+    .highlight { background-color: rgba(0, 255, 0, 0.3); }
+    .output-cell { background-color: rgba(0, 0, 255, 0.1); }
+  </style>
+</head>
+<body>
+  <h2>Transposed Convolution Animator</h2>
+  <div class="controls">
+    Input Size (n): <input id="inputSize" type="number" value="3" min="1" />
+    Filter Size (f): <input id="filterSize" type="number" value="2" min="1" />
+    Stride (s): <input id="stride" type="number" value="2" min="1" />
+    <button onclick="generateGrids()">Generate</button>
+    <button onclick="nextStep()">Next Step</button>
+  </div>
+
+  <div>
+    <h3>Input</h3>
+    <div id="inputGrid"></div>
+    <h3>Output</h3>
+    <div id="outputGrid"></div>
+  </div>
+
+  <script>
+    let inputData = [];
+    let outputData = [];
+    let step = 0;
+    let outRows, outCols;
+    let f = 2, s = 2;
+
+    function createTable(rows, cols, data, editable = false) {
+      const table = document.createElement('table');
+      for (let i = 0; i < rows; i++) {
+        const tr = document.createElement('tr');
+        for (let j = 0; j < cols; j++) {
+          const td = document.createElement('td');
+          if (editable) {
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.value = data[i][j];
+            input.style.width = '30px';
+            input.onchange = () => data[i][j] = parseInt(input.value);
+            td.appendChild(input);
+          } else {
+            td.textContent = data[i][j] || 0;
+            td.className = 'output-cell';
+          }
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+      }
+      return table;
+    }
+
+    function generateGrids() {
+      const n = parseInt(document.getElementById('inputSize').value);
+      f = parseInt(document.getElementById('filterSize').value);
+      s = parseInt(document.getElementById('stride').value);
+      inputData = Array.from({ length: n }, () => Array.from({ length: n }, () => Math.floor(Math.random() * 10)));
+      outRows = (n - 1) * s + f;
+      outCols = (n - 1) * s + f;
+      outputData = Array.from({ length: outRows }, () => Array.from({ length: outCols }, () => 0));
+      step = 0;
+      document.getElementById('inputGrid').innerHTML = '';
+      document.getElementById('outputGrid').innerHTML = '';
+      document.getElementById('inputGrid').appendChild(createTable(n, n, inputData, true));
+      document.getElementById('outputGrid').appendChild(createTable(outRows, outCols, outputData));
+    }
+
+    function nextStep() {
+      const n = inputData.length;
+      if (step >= n * n) return;
+      const i = Math.floor(step / n);
+      const j = step % n;
+      const value = inputData[i][j];
+
+      for (let fi = 0; fi < f; fi++) {
+        for (let fj = 0; fj < f; fj++) {
+          const oi = i * s + fi;
+          const oj = j * s + fj;
+          outputData[oi][oj] += value;
+        }
+      }
+
+      const outGrid = document.getElementById('outputGrid');
+      outGrid.innerHTML = '';
+      outGrid.appendChild(createTable(outRows, outCols, outputData));
+      step++;
+    }
+
+    generateGrids();
+  </script>
+</body>
+</html>
