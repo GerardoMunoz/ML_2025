@@ -34,6 +34,7 @@ https://github.com/GerardoMunoz/ML_2025/blob/main/Hopfield_Covariance.ipynb
 
 ## 5. Supervised Learning
 - Prediction of one of the variables
+- Data leakage 
 - Normalization, Standardization
 - Data balance
 - Overfitting
